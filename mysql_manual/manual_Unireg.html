@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0073)manual_Unireg.html -->
+<html>
+
+<head>
+<title>MySQL Reference Manual for version 3.23.7-alpha. - I What is Unireg?</title>
+<meta content="text/html; charset=big5" http-equiv="Content-Type">
+<!-- This HTML file has been created by texi2html 1.52 (hacked by david@detron.se)
+     from /dr1/my/masters/mysql-3.23/Docs/manual.texi on 9 December 1999 -->
+<meta content="Microsoft FrontPage 3.0" name="GENERATOR">
+<script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"2db29842af5756bf509b2c75a2721481",petok:"dbff35c0aaa1ed8bd12d1360a9a513caff9bde4c-1479574214-1800",zone:"twpug.net",rocket:"0",apps:{"ga_key":{"ua":"UA-11633811-1","ga_bs":"2"}}}];!function(a,b){a=document.createElement("script"),b=document.getElementsByTagName("script")[0],a.async=!0,a.src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=088620b277/cloudflare.min.js",b.parentNode.insertBefore(a,b)}()}}catch(e){};
+//]]>
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-11633811-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
+/* ]]> */
+</script>
+</head>
+
+<body bgColor="#ffffff" link="#101090" text="#000000" vLink="#7030b0">
+
+<p>Go to the <a href="manual_Introduction.html">first</a>, <a href="manual_Regexp.html">previous</a>, 
+<a href="manual_Public_license.html">next</a>, <a href="manual_Concept_Index.html">last</a> 
+section, <a href="manual_toc.html">table of contents</a>. </p>
+
+<hr>
+
+<h1><a href="manual_toc.html#Unireg" name="Unireg">I What is Unireg?</a></h1>
+
+<p>Unireg is our tty interface builder, but it uses a low level connection to our ISAM 
+(which is used by <strong>MySQL</strong>) and because of this it is very quick. It has 
+existed since 1979 (on Unix in C since ~1986). </p>
+
+<p>Unireg has the following components: 
+
+<ul>
+  <li>One table viewer with updates/browsing. </li>
+  <li>Multi table viewer (with one scrolling region). </li>
+  <li>Table creator. (With lots of column tags you can't create with <strong>MySQL</strong>) 
+    This is WYSIWYG (for a tty). You design a screen and Unireg prompts for the column 
+    specification. </li>
+  <li>Report generator. </li>
+  <li>A lot of utilities (quick export/import of tables to/from text files, analysis of table 
+    contents...). </li>
+  <li>Powerful multi-table updates (which we use a lot) with a BASIC-like language with LOTS 
+    of functions. </li>
+  <li>Dynamic languages (at present in Swedish and Finnish). If somebody wants an English 
+    version there are a few files that would have to be translated. </li>
+  <li>The ability to run updates interactively or in a batch. </li>
+  <li>Emacs-like key definitions with keyboard macros. </li>
+  <li>All this in a binary of 800K. </li>
+  <li>The <code>convform</code> utility. Converts <tt>`.frm'</tt> and text files between 
+    different character sets. </li>
+  <li>The <code>myisampack</code> utility. Packs a ISAM table (makes it 50-80% smaller). The 
+    table can be read by <strong>MySQL</strong> like an ordinary table. Only one record has to 
+    be decompressed per access. Cannot handle <code>BLOB</code> or <code>TEXT</code> columns 
+    or updates (yet). </li>
+</ul>
+
+<p>We update most of our production databases with the Unireg interface and serve web 
+pages through <strong>MySQL</strong> (and in some extreme cases the Unireg report 
+generator). </p>
+
+<p>Unireg takes about 3M of disk space and works on at least the following platforms: 
+SunOS 4.x, Solaris, Linux, HP-UX, ICL Unix, DNIX, SCO and MS-DOS. </p>
+
+<p>Unireg is currently only available in Swedish and Finnish. </p>
+
+<p>The price tag for Unireg is 10,000 Swedish kr (about $1500 US), but this includes 
+support. Unireg is distributed as a binary. (But all the ISAM sources can be found in <strong>MySQL</strong>). 
+Usually we compile the binary for the customer at their site. </p>
+
+<p>All new development is concentrated to <strong>MySQL</strong>. </p>
+
+<hr>
+
+<p>Go to the <a href="manual_Introduction.html">first</a>, <a href="manual_Regexp.html">previous</a>, 
+<a href="manual_Public_license.html">next</a>, <a href="manual_Concept_Index.html">last</a> 
+section, <a href="manual_toc.html">table of contents</a>. </p>
+</body>
+</html>

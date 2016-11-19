@@ -1,0 +1,105 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+<title>MySQL中文參考手冊-15 為MySQL增加新程序</title>
+<script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"2db29842af5756bf509b2c75a2721481",petok:"4834341b25a19af74af2bea353d57e66f7a43545-1479574397-1800",zone:"twpug.net",rocket:"0",apps:{"ga_key":{"ua":"UA-11633811-1","ga_bs":"2"}}}];!function(a,b){a=document.createElement("script"),b=document.getElementsByTagName("script")[0],a.async=!0,a.src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=088620b277/cloudflare.min.js",b.parentNode.insertBefore(a,b)}()}}catch(e){};
+//]]>
+</script>
+<style type="text/css">
+<!--
+.p14{font-size:14.8px;font-family:宋體;line-height:14pt;}
+.p5{ border: 1px solid rgb(146,201,201) }
+.a:hover{color:red;}
+a.t1:visited{color:red;}
+-->
+</style>
+<script type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-11633811-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
+/* ]]> */
+</script>
+</head>
+
+<body BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#101090" VLINK="#7030B0" class="p4">
+
+<h1><img src="Img/mysql-logo.gif" alt="mysql-logo.gif (3082 bytes)" WIDTH="127" HEIGHT="60"><font color="#FF0000">MySQL中文參考手冊</font></h1>
+
+<p>譯者：晏子 <a href="/cdn-cgi/l/email-protection#f0d8939c89919eb0839f9885de939f9d">(<span class="__cf_email__" data-cfemail="20434c59414e60534f48550e434f4d">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>）<br>
+GB 碼主頁：<a href="http://linuxdb.yeah.net">http://linuxdb.yeah.net</a></p>
+
+<p>Big5 轉碼者：statue <a href="/cdn-cgi/l/email-protection#2b585f4a5f5e4e054949586b4949580552515e054e4f5e055f5c">
+(<span class="__cf_email__" data-cfemail="35464154414050755757461b4c4f401b5051401b4142">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>） <br>
+詞彙轉換：彭武興 (<a href="/cdn-cgi/l/email-protection#8dfae4e1fee2e3cde0ece4e1efe2f5a3eee2e0a3f9fa"><span class="__cf_email__" data-cfemail="36415f5a455958765b575f5a54594e1855595b184241">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>)<br>
+Big5 碼主頁：
+<a href="http://cnpa.yzu.edu.tw/~cfc/docs/mysqldoc_big5/manual_toc.html">
+http://cnpa.yzu.edu.tw/~cfc/docs/mysqldoc_big5/manual_toc.html</a><br>
+Big5 碼分站：
+<a href="http://php.wilson.gs/mysqldoc/big5/manual_toc.html">
+http://php.wilson.gs/mysqldoc/big5/manual_toc.html
+</p>
+
+<hr>
+
+<p><a HREF="manual_Introduction.html">第一章</a>, <a HREF="manual_Adding_functions.html">前一章</a>, <a HREF="manual_ODBC.html">下一章</a>, 
+<a HREF="manual_Concept_Index.html">最後一章</a>，<a HREF="manual_toc.html">目錄</a>. 
+</p>
+
+<hr>
+
+<h1><a NAME="Adding_procedures" HREF="manual_toc.html#Adding_procedures">15 為MySQL增加新程序</a></h1>
+
+<p>在<strong>MySQL</strong>中，你可以定義一個用C++寫地程序，它能在查詢被送到客戶前存取和修改查詢中的數據。修改可一行一行地或在<code>GROUP 
+BY</code>層次上進行。</p>
+
+<p>我們已經在<strong>MySQL</strong>3.23中創建了一個程序例子來顯示它能做什麼。</p>
+
+<h2><a NAME="procedure_analyse" HREF="manual_toc.html#procedure_analyse">15.1 analyse程序</a></h2>
+
+<p><code>analyse([max elements,[max memory]])</code> </p>
+
+<p>這個程序定義在<tt>“sql/sql_analyse.cc”</tt>，它檢驗來自你的查詢的結果並返回結果的分析。 
+
+<ul>
+  <li><code>max elements</code>（預設256)是<code>analyse</code>將注意的每列不同值的最大數量。這被<code>analyse</code>用來檢查最佳的列類型是否應該是<code>ENUM</code>類型。</li>
+  <li><code>max memory</code>（預設8192)是在<code>analyse</code>嘗試尋找所有不同值的時候應該分配給每列的最大內存量。</li>
+</ul>
+
+<pre>SELECT ... FROM ... WHERE ... PROCEDURE ANALYSE([max elements,[max memory]])
+</pre>
+
+<h2><a NAME="Writing_a_procedure" HREF="manual_toc.html#Writing_a_procedure">15.2 
+編寫一個程序</a></h2>
+
+<p>暫時，對此的唯一文檔是原始程式。:(</p>
+
+<p>你可以檢驗下列文件找到關於程序的所有資訊： 
+
+<ul>
+  <li><tt>“sql/sql_analyse.cc”</tt> </li>
+  <li><tt>“sql/procedure.h”</tt> </li>
+  <li><tt>“sql/procedure.cc”</tt> </li>
+  <li><tt>“sql/sql_select.cc”</tt> </li>
+</ul>
+
+<p><a NAME="IDX680"></a> <a NAME="IDX681"></a> <a NAME="IDX682"></a> </p>
+
+<hr>
+
+<p><a HREF="manual_Introduction.html">第一章</a>, <a HREF="manual_Adding_functions.html">前一章</a>, <a HREF="manual_ODBC.html">下一章</a>, 
+<a HREF="manual_Concept_Index.html">最後一章</a>，<a HREF="manual_toc.html">目錄</a>. 
+</p>
+<script type="text/javascript">/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script></body>
+</html>

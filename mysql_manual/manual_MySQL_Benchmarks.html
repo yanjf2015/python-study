@@ -1,0 +1,176 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+<title>MySQL中文參考手冊- 11 MySQL效能套件</title>
+<script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"2db29842af5756bf509b2c75a2721481",petok:"c69928567eb9b782e519b71d20bf7f2136404aaa-1479574952-1800",zone:"twpug.net",rocket:"0",apps:{"ga_key":{"ua":"UA-11633811-1","ga_bs":"2"}}}];!function(a,b){a=document.createElement("script"),b=document.getElementsByTagName("script")[0],a.async=!0,a.src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=088620b277/cloudflare.min.js",b.parentNode.insertBefore(a,b)}()}}catch(e){};
+//]]>
+</script>
+<style type="text/css">
+<!--
+.p14{font-size:14.8px;font-family:宋體;line-height:14pt;}
+.p5{ border: 1px solid rgb(146,201,201) }
+a:hover{color:red;}
+a.t1:visited{color:red;}
+-->
+</style>
+<script type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-11633811-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
+/* ]]> */
+</script>
+</head>
+
+<body BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#101090" VLINK="#7030B0" class="p4">
+
+<h1><img src="Img/mysql-logo.gif" alt="mysql-logo.gif (3082 bytes)" WIDTH="127" HEIGHT="60"><font color="#FF0000">MySQL中文參考手冊</font></h1>
+
+<p>譯者：晏子 <a href="/cdn-cgi/l/email-protection#e6ce858a9f8788a695898e93c885898b">(<span class="__cf_email__" data-cfemail="1e7d72677f705e6d71766b307d7173">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>）<br>
+GB 碼主頁：<a href="http://linuxdb.yeah.net">http://linuxdb.yeah.net</a></p>
+
+<p>Big5 轉碼者：statue <a href="/cdn-cgi/l/email-protection#94e7e0f5e0e1f1baf6f6e7d4f6f6e7baedeee1baf1f0e1bae0e3">
+(<span class="__cf_email__" data-cfemail="3d4e495c4948587d5f5f4e134447481358594813494a">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>） <br>
+詞彙轉換：彭武興 (<a href="/cdn-cgi/l/email-protection#f88f91948b9796b8959991949a9780d69b9795d68c8f"><span class="__cf_email__" data-cfemail="6d1a04011e02032d000c04010f0215430e020043191a">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>)<br>
+Big5 碼主頁：
+<a href="http://cnpa.yzu.edu.tw/~cfc/docs/mysqldoc_big5/manual_toc.html">
+http://cnpa.yzu.edu.tw/~cfc/docs/mysqldoc_big5/manual_toc.html</a><br>
+Big5 碼分站：
+<a href="http://php.wilson.gs/mysqldoc/big5/manual_toc.html">
+http://php.wilson.gs/mysqldoc/big5/manual_toc.html
+</p>
+
+<hr>
+
+<p><a HREF="manual_Introduction.html">第一章</a>, <a HREF="manual_Performance.html">前一章</a>, 
+<a HREF="manual_Tools.html">下一章</a>, <a HREF="manual_Concept_Index.html">最後一章</a>，<a HREF="manual_toc.html">目錄</a>. </p>
+
+<hr>
+
+<h1><a NAME="MySQL_Benchmarks" HREF="manual_toc.html#MySQL_Benchmarks">11 MySQL 
+效能套件</a></h1>
+
+<p>本章應該包含<strong>MySQL</strong>效能套件的技術描述(和<code>crash-me</code>)，但是該描述還沒被寫成。目前，你應該研究在分發中的<tt>“sql-bench”</tt>目錄下代碼和結果(當然在網頁<a HREF="http://www.mysql.com/crash-me-choose.htmy">http://www.mysql.com/crash-me-choose.htmy</a>並且(通常發現了在MySQL分發的<tt>“sql-bench”</tt>目錄下找到))。 
+</p>
+
+<p>效能將告訴任何用戶一個給定的SQL實現在哪方面表現得很好或很糟糕。 
+</p>
+
+<p>注意，這個效能是單執行緒的，因此它測量操作的最小時間。 </p>
+
+<p>例如(在同一台NT 4.0機器上運行)： </p>
+
+<table border="1" width="100%" NOSAVE>
+  <tr>
+    <td><strong>通過索引讀取 2000000行（2百萬）</strong> </td>
+    <td><strong>秒數</strong></td>
+    <td><strong>秒數</strong></td>
+  </tr>
+  <tr>
+    <td>mysql </td>
+    <td>367 </td>
+    <td>249 </td>
+  </tr>
+  <tr>
+    <td>mysql_odbc </td>
+    <td>464 </td>
+  </tr>
+  <tr>
+    <td>db2_odbc </td>
+    <td>1206 </td>
+  </tr>
+  <tr>
+    <td>informix_odbc </td>
+    <td>121126 </td>
+  </tr>
+  <tr>
+    <td>ms-sql_odbc </td>
+    <td>1634 </td>
+  </tr>
+  <tr>
+    <td>oracle_odbc </td>
+    <td>20800 </td>
+  </tr>
+  <tr>
+    <td>solid_odbc </td>
+    <td>877 </td>
+  </tr>
+  <tr>
+    <td>sybase_odbc </td>
+    <td>17614 </td>
+  </tr>
+</table>
+
+<table border="1" width="100%" NOSAVE>
+  <tr>
+    <td><strong>插入(350768)行</strong> </td>
+    <td><strong>秒數</strong> </td>
+    <td><strong>秒數</strong> </td>
+  </tr>
+  <tr>
+    <td>mysql </td>
+    <td>381 </td>
+    <td>206 </td>
+  </tr>
+  <tr>
+    <td>mysql_odbc </td>
+    <td>619 </td>
+  </tr>
+  <tr>
+    <td>db2_odbc </td>
+    <td>3460 </td>
+  </tr>
+  <tr>
+    <td>informix_odbc </td>
+    <td>2692 </td>
+  </tr>
+  <tr>
+    <td>ms-sql_odbc </td>
+    <td>4012 </td>
+  </tr>
+  <tr>
+    <td>oracle_odbc </td>
+    <td>11291 </td>
+  </tr>
+  <tr>
+    <td>solid_odbc </td>
+    <td>1801 </td>
+  </tr>
+  <tr>
+    <td>sybase_odbc </td>
+    <td>4802 </td>
+  </tr>
+</table>
+
+<p>在上面的測試中<strong>MySQL</strong>用一個8M索引緩存運行。 </p>
+
+<p>注意，沒有包含Oracle，因為他們要求刪去。所有的 Oracle效能測試不得不被Oracle拿走！我們相信使Oracle效能測試<strong>很</strong>有偏見，因為上面的效能測試被假定來顯示可以能為一個單個客戶做一個標準安裝。 
+</p>
+
+<p><code>crash-me</code>試圖確定一個資料庫支援什麼特徵並且實際運行的查詢有什麼能力和限制。例如，它確定： 
+
+<ul>
+  <li>支援的什麼列類型</li>
+  <li>支援多少索引</li>
+  <li>支援什麼功能</li>
+  <li>一個查詢能有多大</li>
+  <li>一個<code>VARCHAR</code>列能有多大</li>
+</ul>
+
+<hr>
+
+<p><a HREF="manual_Introduction.html">第一章</a>, <a HREF="manual_Performance.html">前一章</a>, 
+<a HREF="manual_Tools.html">下一章</a>, <a HREF="manual_Concept_Index.html">最後一章</a>，<a HREF="manual_toc.html">目錄</a>. </p>
+<script type="text/javascript">/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script></body>
+</html>

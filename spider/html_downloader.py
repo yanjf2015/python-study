@@ -11,7 +11,7 @@ class HtmlDownloader(object):
         if url is None:
             return None
         req = urllib2.Request(url, headers=self.headers)
-        response = urllib2.urlopen(req)
+        response = urllib2.urlopen(req, timeout=50)
         if response.getcode() != 200:
             return None
         return response.read()

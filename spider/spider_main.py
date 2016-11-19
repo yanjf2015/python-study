@@ -55,16 +55,15 @@ class SpiderMain(object):
                 new_urls, new_data = self.parser.parse(new_url, html_cont)
                 print 'parse done'
                 self.urls.add_new_urls(new_urls)
-                self.outputer.collect_data(new_data)
+                self.outputer.save_html(new_data)
+                print 'write done'
+                # self.outputer.collect_data(new_data)
                 # if count == 10:
                 #     break
                 count = count + 1
             except Exception,e:
                 print Exception, ":", e
                 print 'craw failed'
-
-        self.outputer.save_html()
-        print 'write done'
 
 if __name__ == "__main__":
     root_url = "http://twpug.net/docs/mysql323/manual_toc.html"

@@ -12,11 +12,10 @@ class HtmlOutputer(object):
             return
         self.datas.append(data)
 
-    def save_html(self):
-        for data in self.datas:
-            writer = open(data['name'], 'w')
-            writer.write(data['countent'])
-            writer.close()
+    def save_html(self, data):
+        writer = open(data['name'], 'w')
+        writer.write(data['countent'])
+        writer.close()
 
     def output_html(self):
         fout = open('output.html', 'w')
