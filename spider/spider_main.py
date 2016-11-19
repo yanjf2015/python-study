@@ -30,6 +30,7 @@
 
 
 import url_manager, html_downloader, html_outputer, html_parser
+import time
 
 
 class SpiderMain(object):
@@ -40,30 +41,32 @@ class SpiderMain(object):
         self.parser = html_parser.HtmlParser()
         self.outputer = html_outputer.HtmlOutputer()
 
-
-
     def craw(self, root_url):
         count = 1
         self.urls.add_new_url(root_url)
         while self.urls.has_new_url():
-            try :
+            time.sleep(30)
+            try:
                 new_url = self.urls.get_new_url()
                 print 'craw %d : %s' % (count, new_url)
-                html_cont = self.downloader.download(new_url)
+                html_cont = self.downloader.download(self.downloader,new_url)
+                print 'download done'
+                html_cont = html_cont.decode('big5', 'ignore').encode('utf-8')
                 new_urls, new_data = self.parser.parse(new_url, html_cont)
+                print 'parse done'
                 self.urls.add_new_urls(new_urls)
                 self.outputer.collect_data(new_data)
-
-
-                if count == 10:
-                    break
+                # if count == 10:
+                #     break
                 count = count + 1
-            except:
+            except Exception,e:
+                print Exception, ":", e
                 print 'craw failed'
 
-        self.outputer.output_html()
+        self.outputer.save_html()
+        print 'write done'
 
 if __name__ == "__main__":
-    root_url = "http://baike.baidu.com/view/21087.htm"
+    root_url = "http://twpug.net/docs/mysql323/manual_toc.html"
     obj_spider = SpiderMain()
     obj_spider.craw(root_url)
